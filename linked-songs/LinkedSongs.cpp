@@ -48,6 +48,14 @@ HRESULT VDJ_API LinkedSongs::GetStreamUrl(const char* uniqueId, IVdjString& url,
     return S_OK;
 }
 
+HRESULT VDJ_API LinkedSongs::GetFolderList(IVdjSubfoldersList* subfoldersList)
+{
+    subfoldersList->add("deck-1-next-songs", "[Deck 1] Next songs");
+    subfoldersList->add("deck-2-next-songs", "[Deck 2] Next songs");
+
+    return S_OK;
+}
+
 HRESULT VDJ_API LinkedSongs::GetContextMenu(const char* uniqueId, IVdjContextMenu* contextMenu)
 {
     contextMenu->add("Open in LinkedSongs");
