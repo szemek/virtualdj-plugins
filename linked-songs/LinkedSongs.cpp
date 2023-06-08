@@ -1,7 +1,10 @@
 #include "LinkedSongs.h"
+#include <filesystem>
+#include <fstream>
 #include <string>
 
 using namespace std;
+namespace fs = std::filesystem;
 
 HRESULT VDJ_API LinkedSongs::OnGetPluginInfo(TVdjPluginInfo8* infos)
 {
@@ -85,5 +88,17 @@ HRESULT VDJ_API LinkedSongs::GetFolderContextMenu(const char *folderUniqueId, IV
 
 HRESULT VDJ_API LinkedSongs::OnFolderContextMenu(const char *folderUniqueId, size_t menuIndex)
 {
+    char folder[1024];
+    this->GetStringInfo("get_vdj_folder", folder, 1024);
+
+    fs::path dir(folder);
+    fs::path file("linked-songs.json");
+    fs::path full_path = dir / file;
+
+    if(not fs::exists(full_path))
+    {
+        ofstream{full_path};
+    }
+
     return S_OK;
 }
