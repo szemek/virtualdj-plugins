@@ -74,7 +74,12 @@ HRESULT VDJ_API LinkedSongs::OnContextMenu(const char* uniqueId, size_t menuInde
 
 HRESULT VDJ_API LinkedSongs::GetFolderContextMenu(const char *folderUniqueId, IVdjContextMenu *contextMenu)
 {
-    contextMenu->add("GetFolderContextMenu");
+    if(folderUniqueId != NULL)
+    {
+        contextMenu->add("Add song from Deck 1"); // 0
+        contextMenu->add("Add song from Deck 2"); // 1
+    }
+
     return S_OK;
 }
 
